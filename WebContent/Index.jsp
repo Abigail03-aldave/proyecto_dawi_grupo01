@@ -9,5 +9,6 @@
 <body>
 <h1>Grupo I</h1>
 <h2>Bienvenidos</h2>
+<h2>Compañeros</h2>
 </body>
 </html>
