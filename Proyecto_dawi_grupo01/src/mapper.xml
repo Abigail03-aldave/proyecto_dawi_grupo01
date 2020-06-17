@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dawi"> 
+	 
+
+	<resultMap  id="mapUsuario" type="usuarioBeanIbatis">
+		<id property="idUsuario" column="idusuario"/>
+		<result property="nombre" column="nombre"/>
+		<result property="apellido" column="apellido"/>
+		<result property="login" column="login"/>
+		<result property="clave" column="password"/>
+		<result property="dni" column="dni"/>
+	</resultMap>
+
+	<resultMap  id="mapOpcion" type="opcionBeanIbatis">
+		<id property="idOpcion" column="idopcion"/>
+		<result property="nombre" column="nombre"/>
+		<result property="ruta" column="ruta"/>
+		<result property="estado" column="estado"/>
+	</resultMap>
+		
+	<!--  Login -->
+	<select id="SQL_login" resultMap="mapUsuario"  parameterType="usuarioBeanIbatis">
+			select * from usuario where login = #{login} and password  = #{clave}
+	</select>	
+	
+	<select id="SQL_traerEnlacesDeUsuario" resultMap="mapOpcion"  parameterType="java.lang.String">
+			select distinct	r.idopcion,	r.nombre,  r.ruta from opcion r inner join rol_has_opcion p on r.idopcion = p.idopcion inner join rol t on  p.idrol = t.idrol  inner join usuario_has_rol q on  t.idrol = q.idrol  where q.idusuario  = #{idUsuario}  order by 1;     
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+

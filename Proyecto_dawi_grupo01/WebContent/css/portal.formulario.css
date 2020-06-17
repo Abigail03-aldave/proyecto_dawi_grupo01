@@ -1,0 +1,31 @@
+body {
+	background-color: #030C1A;
+}
+
+.container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #fff !important
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+table, th, td {
+	border: 1px solid white;
+}
+
