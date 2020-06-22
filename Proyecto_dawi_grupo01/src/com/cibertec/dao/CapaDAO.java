@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cibertec.bean.Cliente;
 import com.cibertec.bean.Opcion;
+import com.cibertec.bean.Ubigeo;
 import com.cibertec.bean.Usuario;
 
 public interface CapaDAO {
@@ -18,4 +19,7 @@ public interface CapaDAO {
 	public int insertarCliente(Cliente c)throws Exception ;	
 	public int actualizarCliente(Cliente c)throws Exception ;	
 	public int eliminarCliente(int idCliente)throws Exception ;	
+	//Ubigeo
+	public List<Ubigeo> traerUbigeos()throws Exception ;
+	public Ubigeo traerUbigeo(int id)throws Exception ;	
 }

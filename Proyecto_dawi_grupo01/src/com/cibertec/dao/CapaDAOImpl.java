@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.cibertec.bean.Cliente;
 import com.cibertec.bean.Opcion;
+import com.cibertec.bean.Ubigeo;
 import com.cibertec.bean.Usuario;
 
 public class CapaDAOImpl implements CapaDAO{
@@ -137,6 +138,36 @@ public class CapaDAOImpl implements CapaDAO{
 			 session.close();
 		}
 		return salida;
+	}
+//UBIGEO-------------------------------------------------------------------------------------------
+	@Override
+	public List<Ubigeo> traerUbigeos() throws Exception {
+		List<Ubigeo> lista = new ArrayList<Ubigeo>();
+		SqlSession sesion = null; 
+		try {
+			sesion =  sqlMapper.openSession();
+			lista = sesion.selectList("SQL_traerUbigeo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			sesion.close();
+		}
+		return lista;
+	}
+   
+	@Override
+	public Ubigeo traerUbigeo(int id) throws Exception {
+		Ubigeo u = new Ubigeo();
+		SqlSession sesion = null; 
+		try {
+			sesion =  sqlMapper.openSession();
+			u = sesion.selectOne("SQL_traerUbigeoUnico");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			sesion.close();
+		}
+		return u;
 	}
 	
 }
