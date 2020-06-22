@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <typeAliases>
 	<typeAlias alias="usuarioBeanIbatis" type="com.cibertec.bean.Usuario" />
 	<typeAlias alias="opcionBeanIbatis" type="com.cibertec.bean.Opcion" />
+	<typeAlias alias="clienteBeanIbatis" type="com.cibertec.bean.Cliente" />
+	<typeAlias alias="ubigeoBeanIbatis" type="com.cibertec.bean.Ubigeo" />
+	<typeAlias alias="caracteristicaclienteBeanIbatis" type="com.cibertec.bean.CaracteristicaCliente" />
+	<typeAlias alias="clientecaracteristicaclienteBeanIbatis" type="com.cibertec.bean.Cliente_has_CaracteristicaCliente" />
 </typeAliases>
 
 

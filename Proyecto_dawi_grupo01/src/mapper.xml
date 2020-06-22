@@ -22,6 +22,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="estado" column="estado"/>
 	</resultMap>
 		
+	<resultMap  id="mapCliente" type="clienteBeanIbatis">
+		<id property="idOpcion" column="idcliente"/>
+		<result property="correo" column="correo"/>
+		<result property="fecharegistro" column="fecharegistro"/>
+		<result property="login" column="login"/>
+		<result property="password" column="password"/>
+		<result property="direccion" column="direccion"/>
+		<result property="estado" column="estado"/>
+		<association property="ubigeo" column="idubigeo" select="sql_llaveforaneaubigeo_cliente" />
+	</resultMap>
+	
+	<resultMap  id="mapUbigeo" type="ubigeoBeanIbatis">
+		<id property="idubigeo" column="idubigeo"/>
+		<result property="departamento" column="departamento"/>
+		<result property="provincia" column="provincia"/>
+		<result property="distrito" column="distrito"/>
+	</resultMap>
+	
+	<resultMap  id="mapCaracteristicaCliente" type="caracteristicaclienteBeanIbatis">
+		<id property="idcaracteristicacliente" column="idcaracteristicacliente"/>
+		<result property="nombre" column="nombre"/>
+		<result property="estado" column="estado"/>
+	</resultMap>
+	
+	<resultMap  id="mapClienteCaracteristicaCliente" type="clientecaracteristicaclienteBeanIbatis">
+		<association property="cliente" column="idcliente" select="sql_llaveforaneaclicacli_cliente" />
+		<association property="caracteristicacliente" column="idcaracteristicacliente" select="sql_llaveforaneaclicacli_cacli" />
+	</resultMap>
 	<!--  Login -->
 	<select id="SQL_login" resultMap="mapUsuario"  parameterType="usuarioBeanIbatis">
 			select * from usuario where login = #{login} and password  = #{clave}
@@ -30,9 +58,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="SQL_traerEnlacesDeUsuario" resultMap="mapOpcion"  parameterType="java.lang.String">
 			select distinct	r.idopcion,	r.nombre,  r.ruta from opcion r inner join rol_has_opcion p on r.idopcion = p.idopcion inner join rol t on  p.idrol = t.idrol  inner join usuario_has_rol q on  t.idrol = q.idrol  where q.idusuario  = #{idUsuario}  order by 1;     
 	</select>
-	
-	
-	
+	<!--  Cliente foranea a Ubigeo -->
+	<select id="sql_llaveforaneaubigeo" resultMap="mapUbigeo"  parameterType="int">
+			select * from ubigeo where idubigeo = #{idubigeo}
+	</select>	
+	<!--  clienteCaracteristicaCliente -->
+	<select id="sql_llaveforaneaclicacli_cliente" resultMap="mapCliente"  parameterType="int">
+			select * from ubigeo where idcliente = #{idcliente}
+	</select>	
+	<select id="sql_llaveforaneaclicacli_cacli" resultMap="mapCaracteristicaCliente"  parameterType="int">
+			select * from ubigeo where idcaracteristicacliente = #{idcaracteristicacliente}
+	</select>	
 </mapper>
 
 
